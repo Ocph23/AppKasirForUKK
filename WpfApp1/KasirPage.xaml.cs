@@ -27,8 +27,11 @@ namespace WpfApp1
         {
             InitializeComponent();
             DataContext = this;
-            DataPelanggan = database.Pelanggan.ToList();
-            DataProduk = database.Produk.ToList();
+            combobox_pelanggan.ItemsSource = database.Pelanggan.ToList();
+            combobox_pelanggan.SelectedItem = database.Pelanggan.FirstOrDefault();
+
+            combo_product.ItemsSource = database.Produk.ToList();
+            datagrid.ItemsSource = Model.DetailPenjualan;
         }
 
         public List<Pelanggan> DataPelanggan { get; set; }
@@ -52,7 +55,8 @@ namespace WpfApp1
                     Model.DetailPenjualan.Add(new DetailPenjualan { JumlahProduk = 1, Produk = selectedItem });
                 }
             }
-            datagrid.Items.Refresh();
+            combo_product.SelectedItem = null;
+            UpdateTotal();
         }
 
         private void ComboBox_KeyUp(object sender, KeyEventArgs e)
@@ -77,28 +81,52 @@ namespace WpfApp1
         {
             try
             {
+                if (Model.TotalHarga <= 0)
+                {
+                    throw new SystemException("Anda Belum Menambahkan Item Produk !");
+                }
+
+                var bayar = Convert.ToInt32(textbox_bayar.Text);
+                if (bayar - Model.TotalHarga < 0)
+                {
+                    throw new SystemException("Jumlah Bayar Belum Cukup !");
+                }
+
+                Model.Pelanggan = combobox_pelanggan.SelectedItem as Pelanggan;
                 database.Penjualan.Attach(Model);
                 database.SaveChanges();
+                MessageBox.Show("Berhasil !");
+                BuatPenjualanBaru();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Periksa Data Anda");
+                MessageBox.Show(ex.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void BuatPenjualanBaru()
+        {
+            Model = new Penjualan();
+            datagrid.ItemsSource = Model.DetailPenjualan;
+            textbox_bayar.Text = "0";
+            textBox_kembali.Text = "0";
+            total1.Text = "0";
+            total2.Text = "0";
+            combo_product.SelectedItem = null;
+            combobox_pelanggan.SelectedItem = database.Pelanggan.FirstOrDefault();
         }
 
         private void datagrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Model.TotalHarga = Model.DetailPenjualan.Sum(x => x.SubTotal);
-            this.total1.Text = this.total2.Text = Model.TotalHarga.ToString("N2");
-            datagrid.Items.Refresh();
+            UpdateTotal();
         }
 
         private void bayar_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
             {
-                double nilaiBayar = Convert.ToDouble(bayar.Text);
-                if (Model.TotalHarga>0 && nilaiBayar >= Model.TotalHarga)
+                double nilaiBayar = Convert.ToDouble(textbox_bayar.Text);
+                if (Model.TotalHarga > 0 && nilaiBayar > 0)
                 {
                     this.textBox_kembali.Text = (nilaiBayar - Model.TotalHarga).ToString("N2");
                 }
@@ -109,9 +137,17 @@ namespace WpfApp1
             }
         }
 
-        private void textBox_kembali_TextChanged(object sender, TextChangedEventArgs e)
-        {
 
+        public void UpdateTotal()
+        {
+            Model.TotalHarga = Model.DetailPenjualan.Sum(x => x.SubTotal);
+            this.total1.Text = this.total2.Text = Model.TotalHarga.ToString("N2");
+            datagrid.Items.Refresh();
+        }
+
+        private void batal_Click(object sender, RoutedEventArgs e)
+        {
+            BuatPenjualanBaru();
         }
     }
 }

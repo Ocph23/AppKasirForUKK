@@ -24,7 +24,7 @@
             <StackPanel Margin="1">
                 <Button Height="35" x:Name="button_home" Margin="2" Foreground="#F1B253" Background="#6C6483" Content="Home" Click="button_home_Click"></Button>
                 <Button Height="35" x:Name="button_produk" Margin="2" Foreground="#F1B253" Background="#6C6483" Content="Produk" Click="button_produk_Click"></Button>
-                <Button Height="35" x:Name="button_penjualan" Margin="2" Foreground="#F1B253" Background="#6C6483" Content="Penjualan"></Button>
+                <Button Height="35" x:Name="button_penjualan" Margin="2" Foreground="#F1B253" Background="#6C6483" Content="Penjualan" Click="button_penjualan_Click"></Button>
                 <Button Height="35" x:Name="button_pelanggan" Margin="2" Foreground="#F1B253" Background="#6C6483" Content="Pelanggan" Click="button_pelanggan_Click"></Button>
                 <Button Height="35" x:Name="button_user" Margin="2" Foreground="#F1B253" Background="#6C6483" Content="User" Click="button_user_Click"></Button>
                 <Button Height="35" x:Name="button_logout" Margin="2" Foreground="#F1B253" Background="#6C6483" Content="Logout"></Button>

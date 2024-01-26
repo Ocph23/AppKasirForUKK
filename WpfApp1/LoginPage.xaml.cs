@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Microsoft.EntityFrameworkCore;
+using MySql.Data.MySqlClient;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,21 +26,32 @@ namespace WpfApp1
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            using var appDatabase = new AppDatabase();
-            var user = appDatabase.User.Where(x => x.UserName == this.userName.Text).FirstOrDefault();
-            if (user != null && user.Status && user.Password == this.password.Password)
+            try
             {
-                if (user.Privilage == Privilage.Administrator)
+                using var appDatabase = new AppDatabase();
+                var user = appDatabase.User.Where(x => x.UserName == this.userName.Text).FirstOrDefault();
+                if (user != null && user.Status && user.Password == this.password.Password)
                 {
-                    var adminPage = new AdminPage();
-                    adminPage.Show();
+                    if (user.Privilage == Privilage.Administrator)
+                    {
+                        var adminPage = new AdminPage();
+                        adminPage.Show();
+                    }
+                    else
+                    {
+                        var kasirPage = new KasirPage();
+                        kasirPage.Show();
+                    }
+                    this.Close();
                 }
                 else
                 {
-                    var kasirPage = new KasirPage();
-                    kasirPage.Show();
+                    throw new SystemException();
                 }
-                this.Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Anda Tidak Memiliki AKses !", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

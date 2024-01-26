@@ -37,7 +37,7 @@
                 <StackPanel Grid.Column="1">
                     <StackPanel  HorizontalAlignment="Right">
                         <Label Content="Pelanggan"></Label>
-                        <ComboBox ItemsSource="{Binding DataPelanggan}"
+                        <ComboBox x:Name="combobox_pelanggan" ItemsSource="{Binding DataPelanggan}"
                                   DisplayMemberPath="NamaPelanggan"
                                   Width="200" Height="35"></ComboBox>
                     </StackPanel>
@@ -64,7 +64,7 @@
                     <ComboBox x:Name="combo_product" Width="200" Height="35" 
                             IsEditable="True" 
                             IsTextSearchEnabled="False" 
-                             IsDropDownOpen="True"
+                           
                             StaysOpenOnEdit="True"
                             TextSearch.TextPath="NamaProduk"  
                               ItemsSource="{Binding DataProduk}" 
@@ -76,7 +76,9 @@
                 <DataGrid x:Name="datagrid" 
                           MinRowHeight="25"
                           SelectionChanged="datagrid_SelectionChanged"
-                          ItemsSource="{Binding Model.DetailPenjualan}" Grid.Row="1"  AutoGenerateColumns="False">
+                          ItemsSource="{Binding Model.DetailPenjualan}" Grid.Row="1" 
+                          CanUserAddRows="False"
+                          AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Kode Produk" Width="*" IsReadOnly="True" Binding="{Binding Produk.ProdukId}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Nama Produk" Width="*" IsReadOnly="True" Binding="{Binding Produk.NamaProduk}"></DataGridTextColumn>
@@ -88,7 +90,7 @@
                             </DataGridTextColumn.CellStyle>
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Jumlah" Width="*" Binding="{Binding JumlahProduk}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="SubTotal"  Width="*" Binding="{Binding SubTotal,StringFormat='N2'}">
+                        <DataGridTextColumn Header="SubTotal" IsReadOnly="True" Width="*" Binding="{Binding SubTotal,StringFormat='N2'}">
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
                                     <Setter Property="HorizontalAlignment" Value="Right"></Setter>
@@ -101,10 +103,10 @@
             </Grid>
             <Grid Grid.Row="2" Margin="0,10,0,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="108*"/>
-                    <ColumnDefinition Width="181*"/>
+                    <ColumnDefinition Width="103*"/>
                     <ColumnDefinition Width="172*"/>
-                    <ColumnDefinition Width="339*"/>
+                    <ColumnDefinition Width="265*"/>
+                    <ColumnDefinition Width="220*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel>
                     <Label Margin="0,3,0,0" Content="Total"></Label>
@@ -113,15 +115,17 @@
                 </StackPanel>
                 <StackPanel Grid.Column="1" >
                     <TextBox IsReadOnly="True" HorizontalContentAlignment="Right" Text="0" x:Name="total2" Height="30"></TextBox>
-                    <TextBox HorizontalContentAlignment="Right" x:Name="bayar" Text="0" Height="30" TextChanged="bayar_TextChanged"></TextBox>
-                    <TextBox IsReadOnly="True" HorizontalContentAlignment="Right" x:Name="textBox_kembali" TextChanged="textBox_kembali_TextChanged" Text="0" Height="30"></TextBox>
+                    <TextBox HorizontalContentAlignment="Right" x:Name="textbox_bayar" Text="0" Height="30" TextChanged="bayar_TextChanged"></TextBox>
+                    <TextBox IsReadOnly="True" HorizontalContentAlignment="Right" x:Name="textBox_kembali" Text="0" Height="30"></TextBox>
                 </StackPanel>
-                <Grid Grid.Column="2" Margin="10">
-                    <Button x:Name="simpan" Content="Simpan" Background="#33BAC3" Click="simpan_Click" ></Button>
-                </Grid>
+                <WrapPanel Grid.Column="2" VerticalAlignment="Center" Margin="10,10,10,10">
+                    <Button Height="45" Width="100" x:Name="simpan" Content="Simpan" Background="#33BAC3" Click="simpan_Click" ></Button>
+                    <Button Height="45" Width="100" x:Name="batal" Content="Batal" 
+                            Background="Coral" Click="batal_Click" ></Button>
+                </WrapPanel>
                 <Grid Grid.Column="3">
-                    <Button  HorizontalAlignment="Right" Click="keluar" Width="100" VerticalAlignment="Center" 
-                        Height="45" Content="Keluar" Background="#F06060" ></Button>
+                    <Button  HorizontalAlignment="Right" Click="keluar"  VerticalAlignment="Center" 
+                        Height="45" Width="100" Content="Keluar" Background="#F06060" ></Button>
                 </Grid>
             </Grid>
         </Grid>

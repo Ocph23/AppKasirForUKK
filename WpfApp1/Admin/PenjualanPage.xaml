@@ -6,9 +6,39 @@
       xmlns:local="clr-namespace:WpfApp1.Admin"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PenjualanPage">
+      Title="ProdukPage">
 
-    <Grid>
-        
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Label Foreground="White" FontWeight="Bold" FontSize="20" Content="PENJUALAN" HorizontalAlignment="Left"></Label>
+        </Grid>
+        <Grid Grid.Row="1">
+            <DataGrid x:Name="datagrid" MinRowHeight="25" ItemsSource="{Binding DataPenjualan}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Tanggal" Binding="{Binding Tanggal}" />
+                    <DataGridTextColumn Width="*" Header="Pelanggan" Binding="{Binding Pelanggan.NamaPelanggan}"/>
+                    <DataGridTextColumn Width="*" Header="Total" Binding="{Binding TotalHarga}"/>
+                </DataGrid.Columns>
+
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <DataGrid HorizontalAlignment="Stretch" ItemsSource="{Binding DetailPenjualan}" CanUserAddRows="False" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="100" Header="Kode Produk" Binding="{Binding Produk.ProdukId}" />
+                                <DataGridTextColumn Width="200"  Header="Nama Produk " Binding="{Binding Produk.NamaProduk}" />
+                                <DataGridTextColumn Width="200" Header="Harga" Binding="{Binding Produk.Harga}" />
+                                <DataGridTextColumn Width="180"  Header="Satuan" Binding="{Binding Produk.Satuan}" />
+                                <DataGridTextColumn Width="110"  Header="Jumlah" Binding="{Binding JumlahProduk}" />
+                                <DataGridTextColumn  Width="200" Header="SubTotal" Binding="{Binding SubTotal,StringFormat='N2'}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Page>

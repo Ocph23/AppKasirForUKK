@@ -12,7 +12,7 @@ namespace WpfApp1.Models
         [Key]
         public int PenjualanId { get; set; }
 
-        public DateTime Tanggal { get; set; }
+        public DateTime Tanggal { get; set; } =DateTime.Now;
 
         public Pelanggan Pelanggan { get; set; }
 

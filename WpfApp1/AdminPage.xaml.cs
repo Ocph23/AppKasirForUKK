@@ -45,5 +45,10 @@ namespace WpfApp1
         {
             this.frame.Navigate(new PelangganPage());
         }
+
+        private void button_penjualan_Click(object sender, RoutedEventArgs e)
+        {
+            this.frame.Navigate(new PenjualanPage());
+        }
     }
 }
