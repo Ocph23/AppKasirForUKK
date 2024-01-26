@@ -1,0 +1,39 @@
+﻿<Window x:Class="WpfApp1.AdminPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Background="#6C6483"
+        Title="Admin Page" d:Height="600" d:Width="1000"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        WindowState="Maximized">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="80*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Background="#58516B" Grid.Column="0" >
+            <StackPanel Margin="5">
+                <Label HorizontalAlignment="Center" Foreground="White" Content="APLIKASI KASIR" FontSize="20"></Label>
+                <Label HorizontalAlignment="Center" Content="ADMINISTRATOR" FontSize="14" Foreground="White"></Label>
+                <Rectangle Height="1"   Fill="White"/>
+            </StackPanel>
+            <StackPanel Margin="1">
+                <Button Height="35" x:Name="button_home" Margin="2" Foreground="#F1B253" Background="#6C6483" Content="Home" Click="button_home_Click"></Button>
+                <Button Height="35" x:Name="button_produk" Margin="2" Foreground="#F1B253" Background="#6C6483" Content="Produk" Click="button_produk_Click"></Button>
+                <Button Height="35" x:Name="button_penjualan" Margin="2" Foreground="#F1B253" Background="#6C6483" Content="Penjualan"></Button>
+                <Button Height="35" x:Name="button_pelanggan" Margin="2" Foreground="#F1B253" Background="#6C6483" Content="Pelanggan" Click="button_pelanggan_Click"></Button>
+                <Button Height="35" x:Name="button_user" Margin="2" Foreground="#F1B253" Background="#6C6483" Content="User" Click="button_user_Click"></Button>
+                <Button Height="35" x:Name="button_logout" Margin="2" Foreground="#F1B253" Background="#6C6483" Content="Logout"></Button>
+            </StackPanel>
+        </StackPanel>
+
+        <Grid Grid.Column="1">
+            <Frame x:Name="frame" NavigationUIVisibility="Hidden" />
+        </Grid>
+
+    </Grid>
+</Window>

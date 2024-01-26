@@ -1,0 +1,39 @@
+﻿<Window x:Class="WpfApp1.LoginPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d" 
+        Title="Login" Height="500" Width="500" 
+        ResizeMode="NoResize" 
+        WindowStyle="None" 
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen">
+    <Border Background="#6C6483" CornerRadius="10,50,50,50">
+      
+        <Grid >
+            <Grid.Style >
+                <Style TargetType="Grid" >
+                    <Style.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="50" />
+                        </Style>
+                    </Style.Resources>
+                </Style>
+            </Grid.Style>
+            <StackPanel  Width="200" VerticalAlignment="Center">
+                <Label Foreground="White" Margin="20" FontSize="20" Content="APLIKASI KASIR" FontWeight="Bold"></Label>
+                <Label FontSize="12" Content="User Name"></Label>
+                <TextBox x:Name="userName" VerticalContentAlignment="Center" FontSize="14" Height="30"></TextBox>
+                <Label Margin="0,20,0,0" Content="Password"></Label>
+                <PasswordBox x:Name="password" VerticalContentAlignment="Center"  Height="35"></PasswordBox>
+                <StackPanel Margin="10" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Button  Height="35" Background="#33BAC3" Click="Button_Click" Margin="5" Width="70" Content="Login"></Button>
+                    <Button Height="35" Background="#F06060" Margin="5" Width="70" Content="Keluar" Click="Button_Click_1"></Button>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
